@@ -101,9 +101,19 @@ function fetchWeather (lat, lon, city) {
         console.log(dailyForecast)
 
         
-        for(let i = 1; i < dailyForecast.length; i += 8){
-            
-            fiveDay.textContent = "Temp: " + dailyForecast[humidity];
+        for(let i = 0; i < dailyForecast.length; i++){
+        
+            var currentForecastTemp = document.createElement("p");
+             currentForecastTemp.textContent = `Temp: ${dailyForecast[i].temp.day}`
+             console.log(dailyForecast[i].temp.day)
+            currentForecastContainer.appendChild(currentForecastTemp);
+
+            var currentForecastWind = document.createElement("p");
+            currentForecastWind.textContent = `Wind: ${dailyForecast[i].wind_speed}`
+ 
+           currentForecastContainer.appendChild(currentForecastWind);
+
+            //fiveDay.textContent = "Temp: " + dailyForecast[humidity];
 
        }
        
