@@ -1,15 +1,17 @@
 const searchForm = document.getElementById("search-form");
 const searchInput = document.getElementById("search-input");
-const currentCity = document.createElement("h1")
-const nowWeather = document.getElementById("current-weather");
+var fiveDay = document.querySelector(".day5");
+let fiveTemp = document.querySelector("temp");
+
+
 
 // create a searchform submit and add a function that gets lat, lon, and city name
 searchForm.addEventListener("submit", function(event) {
     event.preventDefault();
 
-    let search = searchInput.value.trim();
+    var search = searchInput.value.trim();
 
-    let apiURL = `http://api.openweathermap.org/geo/1.0/direct?q=${search}&limit=5&appid=${API_KEY}`
+    var apiURL = `http://api.openweathermap.org/geo/1.0/direct?q=${search}&limit=5&appid=${API_KEY}`
     //we then fetch the api and then create a response function
     fetch(apiURL).then(function(response) {
         return response.json()
@@ -21,7 +23,7 @@ searchForm.addEventListener("submit", function(event) {
         else {
             let lat = data[0].lat;
             let lon = data[0].lon;
-            let city = data[0].city;
+            let city = data[0].name;
             // lattitude longitude city 
             fetchWeather(lat, lon, city);
         } 
@@ -32,7 +34,7 @@ searchForm.addEventListener("submit", function(event) {
 
 // now we create a fetchweather function with parameters of lat, lon and city
 function fetchWeather (lat, lon, city) {
-    let apiURL = `http://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&units=imperial&appid=${API_KEY2}`
+    var apiURL = `http://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&units=imperial&appid=${API_KEY2}`
     
 // create a new function that fetches api, then creates response
     fetch(apiURL).then(function(response) {
@@ -40,32 +42,54 @@ function fetchWeather (lat, lon, city) {
     }).then (function(data) {
         
         // create new header using const currentCity
-        currentCity.textContent = city;
-        nowWeather.appendChild(currentCity);
 
         console.log(data);
 
         // declare variables using the info from console.log(data)
         let tempF = data.current.temp;
-        let windMph = data.current.wind;
+        let windMph = data.current.wind_speed;
         let humidity = data.current.humidity;
+        let uvIndex = data.current.uvi;
 
         // print out temp, wind, and humidity
         // to do, UV index
-        let nowTemp = document.createElement("p")
+        //let nowTemp = document.createElement("p")
+
+        const nowTemp = document.querySelector("#todayTemp");
+        const nowCity = document.querySelector("#cityName");
+        const nowWind = document.querySelector("#todayWind");
+        const nowUv = document.querySelector("#todayUv");
+        const nowHumidity = document.querySelector("#todayHumidity");
+
+        /*
+        if (humidity <= 2) {
+            nowUv.classList.add("goodUv");
+        }
+
+        else if (humidity >= 3) {
+            nowUv.classList.add("okayUv")
+        }
+
+        else if (humidity >= 6) {
+            nowUv.classList.add("moderateUv")
+        }
+
+        else if (humidity >= 8) {
+            nowUv.classList.add("badUv")
+        }
+
+        else 
+            nowUv.classList.add("vBadUv")
+            */
+        
 
         nowTemp.textContent = "Temp: " + tempF + " F";
-        nowWeather.appendChild(nowTemp);
-
-        let nowWind = document.createElement("p")
-   
+        nowHumidity.textContent = "Humidity: " + humidity + "%";
+        nowCity.textContent = "City: " + city;
         nowWind.textContent = "Wind: " + windMph + " MPH";
-        nowWeather.appendChild(nowWind);
+        nowUv.textContent = "UV Index: " + uvIndex;
 
-        let nowHumidity = document.createElement("p")
-    
-        nowHumidity.textContent = "Humidity: " + humidity;
-        nowWeather.appendChild(nowHumidity);
+       
 
         let forecast = document.createElement("h1")
         let currentForecastContainer = document.getElementById("current-forecast");
@@ -76,6 +100,13 @@ function fetchWeather (lat, lon, city) {
         
         console.log(dailyForecast)
 
+        
+        for(let i = 1; i < dailyForecast.length; i += 8){
+            
+            fiveDay.textContent = "Temp: " + dailyForecast[humidity];
+
+       }
+       
        
 
 

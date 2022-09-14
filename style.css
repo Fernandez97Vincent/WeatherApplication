@@ -1,0 +1,84 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: azure;
+}
+
+header {
+    background-color: lavender;
+    margin-bottom: 15px;
+}
+
+#wApp {
+    text-align: center;
+    color: gray;
+}
+
+#search-form {
+    display: flex;
+    flex-direction: column;
+}
+
+#search-input {
+    width: 10%;
+    height: 20px;
+    margin-bottom: 15px;
+}
+
+#submitBtn {
+    width: 5%;
+    margin-bottom: 15px;
+}
+
+.current-container {
+    display: flex;
+    font-size: 50px;
+
+    width: 100%;
+    justify-content: center;
+}
+
+.future-forecast {
+    background-color: rgba(214, 25, 25, 0.185);
+    padding: 25px;
+    position: fixed;
+    display: flex;
+    color: white;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.weather-forecast {
+    border: solid 2px black;
+    padding: 5rem;
+}
+
+.goodUv {
+    background-color: green;
+}
+
+.okayUv {
+    background-color: yellow;
+}
+
+.moderateUv {
+    background-color: orange;
+}
+
+
+
+.badUv {
+    background-color: red;
+}
+
+.vBadUv {
+    background-color: purple;
+
+}
+
+
